@@ -1,5 +1,6 @@
 using System;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace TcpConnectionService {
 	public class ConnectionObject {
@@ -22,22 +23,37 @@ namespace TcpConnectionService {
 			this.initialize ();
 		}
 
-		private bool initialize() {
+		public bool isConnected () {
+			return connected;
+		}
+
+		public void connect () {
+			initialize ();
+		}
+
+		public void disconnect () {
+			if (connected) {
+				mySocket.Close ();
+			}
+		}
+
+		private bool initialize () {
 			if (mySocket == null)
-				mySocket = new System.Net.Sockets.TcpClient();
+				mySocket = new System.Net.Sockets.TcpClient ();
 			try {
 				mySocket.Connect (ipAddress, port);
+				connected = true;
 				return true;
 			} catch (System.Net.Sockets.SocketException e) {
 				Console.WriteLine ("Unable to connect, check if the brick is up and has the correct IP");
-				Console.WriteLine (e.ToString ());
+				//Console.WriteLine (e.ToString ());
 			} catch (Exception e) {
 				Console.WriteLine ("Some exception happened: " + e.ToString ());
 			}
 			return false;
 		}
 
-		public string sendMessage(string message) {
+		public string sendMessage (string message) {
 			int connectionCounter = 0;
 			bool continuing = false;
 			if (mySocket == null) {
@@ -46,6 +62,7 @@ namespace TcpConnectionService {
 			while (!mySocket.Connected && connectionCounter < 4) {
 				continuing = initialize ();
 				++connectionCounter;
+				Thread.Sleep (2000);
 			}
 			if (mySocket.Connected)
 				continuing = true;
