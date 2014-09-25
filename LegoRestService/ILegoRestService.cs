@@ -38,23 +38,23 @@ namespace LegoRestService {
 
 		[OperationContract]
 		[WebGet (UriTemplate = Routing.RSgetContainerFromTruck, BodyStyle = WebMessageBodyStyle.Bare)]
-		string RSgetContainerFromTruck (string units);
+		string RSgetContainerFromTruck ();
 
 		[OperationContract]
 		[WebGet (UriTemplate = Routing.RSgetContainerFromStorage, BodyStyle = WebMessageBodyStyle.Bare)]
-		string RSgetContainerFromStorage (string units);
+		string RSgetContainerFromStorage ();
 
 		[OperationContract]
 		[WebGet (UriTemplate = Routing.RSdropContainerOnTruck, BodyStyle = WebMessageBodyStyle.Bare)]
-		string RSdropContainerOnTruck (string units);
+		string RSdropContainerOnTruck ();
 
 		[OperationContract]
 		[WebGet (UriTemplate = Routing.RSdropContainerOnStorage, BodyStyle = WebMessageBodyStyle.Bare)]
-		string RSdropContainerOnStorage (string units);
+		string RSdropContainerOnStorage ();
 
 		[OperationContract]
 		[WebGet (UriTemplate = Routing.RSreset, BodyStyle = WebMessageBodyStyle.Bare)]
-		string RSreset (string units);
+		string RSreset ();
 
 		[OperationContract]
 		[WebGet (UriTemplate = Routing.RSRetractArm, BodyStyle = WebMessageBodyStyle.Bare)]

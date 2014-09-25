@@ -13,11 +13,10 @@ namespace LegoRestService {
 	[ServiceBehavior (InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Single, IncludeExceptionDetailInFaults = true)]
 	[AspNetCompatibilityRequirements (RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
 	public class LegoRestService:ILegoRestService {
-		private ConnectionObject gantryCraneConnection = new ConnectionObject ("10.0.0.3");
-		private ConnectionObject truckConnection = null;
-		// new ConnectionObject ("10.0.0.5");
-		private ConnectionObject reachstackerConnection = null;
-		//new ConnectionObject ("10.0.0.4");
+		private ConnectionObject gantryCraneConnection = null;
+		/* new ConnectionObject ("10.0.0.3");*/
+		private ConnectionObject truckConnection = new ConnectionObject ("10.0.0.5");
+		private ConnectionObject reachstackerConnection = new ConnectionObject ("10.0.0.4");
 		//private Stack<String> messages;
 		public string GetClientNameById (string Id) {
 			Random r = new Random ();
@@ -65,23 +64,23 @@ namespace LegoRestService {
 			return reachstackerConnection.sendMessage ("retr$" + units);
 		}
 
-		public string RSgetContainerFromTruck (string units) {
-			return reachstackerConnection.sendMessage ("getFromTruck$");
+		public string RSgetContainerFromTruck () {
+			return reachstackerConnection.sendMessage ("getContainerFromTruck$");
 		}
 
-		public string RSgetContainerFromStorage (string units) {
-			return reachstackerConnection.sendMessage ("getFromStorage$");
+		public string RSgetContainerFromStorage () {
+			return reachstackerConnection.sendMessage ("getContainerFromStorage$");
 		}
 
-		public string RSdropContainerOnTruck (string units) {
-			return reachstackerConnection.sendMessage ("dropOnTruck$");
+		public string RSdropContainerOnTruck () {
+			return reachstackerConnection.sendMessage ("dropContainerOnTruck$");
 		}
 
-		public string RSdropContainerOnStorage (string units) {
-			return reachstackerConnection.sendMessage ("dropOnStorage$");
+		public string RSdropContainerOnStorage () {
+			return reachstackerConnection.sendMessage ("dropContainerOnStorage$");
 		}
 
-		public string RSreset (string units) {
+		public string RSreset () {
 			return reachstackerConnection.sendMessage ("reset$");
 		}
 
